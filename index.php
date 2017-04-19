@@ -35,7 +35,7 @@ get_header(); ?>
 ) );
 foreach( $active_categories as $category ) {
 echo 	'<div class="small-12 medium-12 large-12 columns '.$category->slug.'">';
-					$apquery = new WP_Query( array( 'category_name' => $category->slug, 'tag' => 'current-issue', ) );
+					$apquery = new WP_Query( array( 'category_name' => $category->slug, 'issue' => 'current-issue', ) );
 					if ( $apquery->have_posts() ) : 
 								 while ( $apquery->have_posts() ) : $apquery->the_post();
 									$galleryArray = get_post_gallery_ids($post->ID);
