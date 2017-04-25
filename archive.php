@@ -9,7 +9,7 @@
 
 get_header(); ?>
 <div class="small-12 medium-12 large-12 columns contentdiv">
-	<div class="small-12 medium-8 large-8 columns nopadding">
+	<div class="small-12 medium-8 large-8 columns">
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
 
@@ -49,6 +49,11 @@ while ( $query->have_posts() ) {
 							echo '<header class="entry-header">';
 										the_category();
 										the_title( '<h2 class="entry-title-tag"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
+						$value = get_field( "author" );
+							if( $value ) { 
+    					echo '<h5 class="author-byline">By '.$value.'</h5>';
+							} else {
+							}					
 							echo '</header>';//closes .entry-header
 										the_excerpt('<p>','</p>'); 
 								echo '</div>';
@@ -74,7 +79,13 @@ while ( $query->have_posts() ) {
 					<div class="small-12 columns medium-7 large-7 columns">
 							<header class="entry-header">
 										<?php the_category();?>
-										<?php 	the_title( '<h2 class="entry-title-tag"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' ); ?>
+										<?php 	the_title( '<h2 class="entry-title-tag"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' ); 
+								$value = get_field( "author" );
+							if( $value ) { 
+    					echo '<h5 class="author-byline">By '.$value.'</h5>';
+							} else {
+							}					
+								?>
 						</header><!-- .entry-header -->
 													<p><?php the_excerpt(); ?></p> 
 					</div>
@@ -87,7 +98,13 @@ while ( $query->have_posts() ) {
 					</div>			
 					<div class="small-12 columns medium-7 large-7 columns">
 							<header class="entry-header">
-										<?php 	the_title( '<h2 class="entry-title-tag"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' ); ?>
+										<?php 	the_title( '<h2 class="entry-title-tag"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' ); 
+								$value = get_field( "author" );
+							if( $value ) { 
+    					echo '<h5 class="author-byline">By '.$value.'</h5>';
+							} else {
+							}					
+								?>
 						</header><!-- .entry-header -->
 													<p><?php the_excerpt(); ?></p> 
 					</div>
@@ -95,7 +112,13 @@ while ( $query->have_posts() ) {
 		}else{
 			?>
 				<header class="entry-header">
-						<?php 	the_title( '<h2 class="entry-title-tag"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' ); ?>
+						<?php 	the_title( '<h2 class="entry-title-tag"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' ); 
+					$value = get_field( "author" );
+							if( $value ) { 
+    					echo '<h5 class="author-byline">By '.$value.'</h5>';
+							} else {
+							}					
+					?>
 				</header><!-- .entry-header -->
 				<div class="small-12 medium-12 larg-12 columns">		
 						<?php	

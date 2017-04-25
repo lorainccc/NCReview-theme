@@ -11,8 +11,10 @@ h2.entry-title a{color: #000; text-decoration: underline;}
 h2.entry-title-tag a{color: #000; text-decoration: none;}
 h3.entry-title a{color: #000;}
 h2.entry-title a:hover{ color: #008CBA;}
-h2.current-issue-tag a{color: #777; text-decoration: underline;}
+header.entry-header a h2.current-issue-tag,h2.current-issue-tag a{color: #777; text-decoration: underline;}
 h3 a, h3 a:hover { color: #000;}
 h1.widget-title{ font-size: 1.75rem;}
 .sidebarcontainer a.wpp-post-title {font-size: 1.3rem; text-decoration: underline;}
 .sidebarcontainer .post-stats {display: block;font-size: 15px;font-weight: bold;}
+h1{font-size: 2.2rem;}h1,h2{font-weight: 700;}h2{ font-size: 2.0rem;}h5.author-byline{font-size: 1.1rem;padding-left: 0.25rem;margin-top: -0.55rem;font-style: italic;}
+h2.screen-reader-text{color: #fff;padding: 1rem;font-size: 1.5rem;}
