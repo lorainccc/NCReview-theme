@@ -19,7 +19,6 @@ get_header(); ?>
 									<!-- Home Page Code Starts here -->
 									<?php $homequery = new WP_Query( array( 'pagename' => 'homepage') );?>
 									<?php if ( $homequery->have_posts() ) : ?>
-											<!-- pagination here -->
 											<!-- the loop -->
 											<?php while ( $homequery->have_posts() ) : $homequery->the_post();?>
 											<div class="small-12 medium-12 large-12 columns home-page-content">
@@ -35,7 +34,7 @@ get_header(); ?>
 ) );
 foreach( $active_categories as $category ) {
 echo 	'<div class="small-12 medium-12 large-12 columns '.$category->slug.'">';
-					$apquery = new WP_Query( array( 'category_name' => $category->slug, 'issue' => 'current-issue', ) );
+					$apquery = new WP_Query( array( 'category_name' => $category->slug, 'tag' => 'current-issue', ) );
 					if ( $apquery->have_posts() ) : 
 								 while ( $apquery->have_posts() ) : $apquery->the_post();
 									$galleryArray = get_post_gallery_ids($post->ID);
@@ -46,7 +45,13 @@ echo 	'<div class="small-12 medium-12 large-12 columns '.$category->slug.'">';
 												?>
 															<div class="small-12 columns medium-12 large-12 columns">	
 																	<?php the_category(); ?>
-														<?php 	the_title( '<h3><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h3>' ); ?>
+														<?php 	the_title( '<h3><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h3>' );
+																$value = get_field( "author" );
+							if( $value ) { 
+    					echo '<h5 class="author-byline">By '.$value.'</h5>';
+							} else {
+							}					
+																?>
 														<p><?php the_excerpt(); ?></p> 
 														</div>
 													<div class="small-12 columns medium-12 large-12 columns">	
@@ -68,7 +73,13 @@ echo 	'<div class="small-12 medium-12 large-12 columns '.$category->slug.'">';
 													</div>
 													<div class="small-12 columns medium-7 large-7 columns">
 														<?php the_category(); ?>
-														<?php 	the_title( '<h3><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h3>' ); ?>
+														<?php 	the_title( '<h3><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h3>' );
+														$value = get_field( "author" );
+							if( $value ) { 
+    					echo '<h5 class="author-byline">By '.$value.'</h5>';
+							} else {
+							}					
+														?>
 														<p><?php the_excerpt(); ?></p> 
 										</div>
 										<?php
@@ -83,7 +94,13 @@ echo 	'<div class="small-12 medium-12 large-12 columns '.$category->slug.'">';
 										</div>
 										<div class="small-12 columns medium-7 large-7 columns">
 														<?php the_category(); ?>
-														<?php 	the_title( '<h3><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h3>' ); ?>
+														<?php 	the_title( '<h3><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h3>' );
+											$value = get_field( "author" );
+							if( $value ) { 
+    					echo '<h5 class="author-byline">By '.$value.'</h5>';
+							} else {
+							}					
+											?>
 														<p><?php the_excerpt(); ?></p> 
 										</div>
 									<?php
@@ -92,7 +109,13 @@ echo 	'<div class="small-12 medium-12 large-12 columns '.$category->slug.'">';
 									?>	
 										<div class="small-12 columns medium-12 large-12 columns">				
 												<?php the_category(); ?>
-												<?php 	the_title( '<h2><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' ); ?>
+												<?php 	the_title( '<h2><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' ); 
+											$value = get_field( "author" );
+							if( $value ) { 
+    					echo '<h5 class="author-byline">By '.$value.'</h5>';
+							} else {
+							}					
+											?>
 											<p><?php the_excerpt(); ?></p>
 										</div>
 									<?php }						

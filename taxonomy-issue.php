@@ -14,15 +14,35 @@ get_header(); ?>
 		<main id="main" class="site-main" role="main">
 
 		<?php
-		if ( have_posts() ) : ?>
-
-			<header class="page-header">
-				<?php
-					the_archive_title( '<h1 class="page-title">', '</h1>' );
+		if ( have_posts() ) : 
+			$queried_object = get_queried_object();
+			$currentTax = $queried_object->slug;
+			if( $currentTax != 'current-issue'){
+			echo '<header class="page-header">';
+				echo '<h1>Welcome to the North Coast Review</h1>';
+					the_archive_title( '<h3 style="text-align: center;">', '</h3>' );
 					the_archive_description( '<div class="taxonomy-description">', '</div>' );
-				?>
-			</header><!-- .page-header -->
-<?php 	endif; ?>
+				echo '<h4 align="center">A Journal of the Creative Writing Institute of<br>
+Lorain County Community College,<br>
+Bruce Weigl, Director</h4>';
+			echo '</header>';// .page-header -->
+			}else{
+					 //Home Page Code Starts here -->
+									$homequery = new WP_Query( array( 'pagename' => 'homepage') );
+									if ( $homequery->have_posts() ) : 
+											// the loop -->
+											 while ( $homequery->have_posts() ) : $homequery->the_post();?>
+											<div class="small-12 medium-12 large-12 columns home-page-content">
+																	<p><?php the_content(); ?></p>	
+											</div>
+											<?php endwhile;
+									 endif; 
+				// Home Page Code Ends here -->
+				
+			}
+			?>
+
+			<?php 	endif; ?>
 			<?php	
 			if ( have_posts() ) : 
 			echo '<div class="small-12 columns issue-entries">';

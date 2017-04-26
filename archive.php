@@ -37,7 +37,12 @@ while ( $query->have_posts() ) {
 ?>	
 			<div class="small-12 medium-12 large-12 columns current-issue-post">
 							<header class="entry-header">
-										<h2 class="current-issue-tag"><?php the_tags('','',''); ?></h2>
+										<?php 
+								$term_list = wp_get_post_terms($post->ID, 'issue', array("fields" => "all"));
+										foreach($term_list as $term_single) {
+										echo '<a href="/issue/'.$term_single->slug.'"><h2 class="current-issue-tag">'.$term_single->name.'</h2></a>'; //do something here
+									}
+										?>
 										
 							</header><!-- .entry-header -->
 						<div class="entry-content">
@@ -141,28 +146,39 @@ while ( $query->have_posts() ) {
  */
 wp_reset_postdata();
 
-?>	<?php	
-			if ( have_posts() ) : 
+?>	
+		<?php	
+	$nonciargs = array(
+	'post_type' => 'post',
+	'category_name'=> $thecategory,
+	'tax_query' => array(
+				array(
+					'taxonomy' => 'issue',
+					'field'    => 'slug',
+					'terms'    => 'current-issue',
+					'operator' => 'NOT IN'
+				),
+		),	
+	);
+$nonciquery = new WP_Query( $nonciargs );	
+// The Loop
+if ( $nonciquery->have_posts() ) {
+	echo '<div class="small-12 columns issue-entries">';
+	while ( $nonciquery->have_posts() ) {
+		$nonciquery->the_post();
+	get_template_part( 'template-parts/content', 'category' );
+	}
+	echo '</div>';
+	echo '<div class="small-12 columns nopadding">';
+		the_posts_navigation();
+	echo '</div>';	
+	/* Restore original Post Data */
+	wp_reset_postdata();
+} else {
+	// no posts found
+}	
 			
-			/* Start the Loop */
-			while ( have_posts() ) : the_post();
-
-				/*
-				 * Include the Post-Format-specific template for the content.
-				 * If you want to override this in a child theme, then include a file
-				 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-				 */
-				get_template_part( 'template-parts/content', 'category' );
-
-			endwhile;
-
-			the_posts_navigation();
-
-		else :
-
-			get_template_part( 'template-parts/content', 'none' );
-
-		endif; ?>
+			?>
 
 		</main><!-- #main -->
 	</div><!-- #primary -->
